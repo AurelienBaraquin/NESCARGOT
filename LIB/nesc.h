@@ -5,6 +5,7 @@
 #include "text.h"
 #include "index.h"
 #include "SPRITE/sprite.h"
+#include "SPRITE/metasprite.h"
 #include "SPRITE/Isprite.h"
 
 #endif

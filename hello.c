@@ -1,8 +1,21 @@
 #include "LIB/nesc.h"
 #pragma bss-name(push, "ZEROPAGE")
 
+Metasprite met = {
+	{
+		{0, 0, 0x01, NO_FLIP},
+		{0, 8, 0x11, NO_FLIP},
+		{8, 0, 0x01, FLIP_H},
+		{8, 8, 0x11, FLIP_H},
+		MET_STOP
+	}
+};
+
+Sprite spr = {0x00, NO_FLIP};
+
 void main(void) {
-	ISprite* sprite = sprite_add(10, 10, 0x00, NO_FLIP);
+	ISprite* sprite = sprite_add(10, 10, &spr);
+	ISprite* metasprite = metasprite_add(40, 10, &met);
 
 	ppu_off();
 
@@ -18,6 +31,8 @@ void main(void) {
 	while (1) {
 		start_drawing();
 
+		draw(metasprite);
+		metasprite->x++;
 		draw(sprite);
 		sprite->y += 10;
 		draw(sprite);

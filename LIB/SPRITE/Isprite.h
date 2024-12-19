@@ -1,6 +1,14 @@
 #ifndef __I_SPRITE_NESC_H__
 #define __I_SPRITE_NESC_H__
 
+#include "ESSENTIAL/nesc_ess.h"
+
+typedef enum {
+    NO_FLIP = 0,
+    FLIP_H = 0 | OAM_FLIP_H,
+    FLIP_V = 0 | OAM_FLIP_V
+} OAMFlip;
+
 #define MAX_SPRITES 64
 
 typedef enum {
