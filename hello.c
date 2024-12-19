@@ -6,8 +6,7 @@
  
  
  
-#include "LIB/neslib.h"
-#include "LIB/nesapi.h" 
+#include "LIB/nesc.h"
 
 #define BLACK 0x0f
 #define DK_GY 0x00
