@@ -1,7 +1,7 @@
 #ifndef __NESC_INDEX_H__
 #define __NESC_INDEX_H__
 
-#include "ESSENTIAL/nesapi.h"
+#include "ESSENTIAL/nesc_ess.h"
 
 /**
  * @brief Get the current VRAM address.

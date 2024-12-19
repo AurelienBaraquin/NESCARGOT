@@ -2,10 +2,7 @@
 #define __NESC_TEXT_H__
 
 #include "ESSENTIAL/nesc_ess.h"
-
-static inline void put(unsigned char c) {
-    vram_put(c);
-}
+#include "index.h"
 
 /**
  * @brief Write a string of text to the screen.
@@ -16,9 +13,17 @@ static inline void put(unsigned char c) {
  */
 static inline void write(const char* text) {
     unsigned char i;
+    unsigned char x = index_x();
+    unsigned char y = index_y();
 
-    for (i = 0; text[i] != '\0'; ++i)
-        put(text[i]);
+    for (i = 0; text[i] != '\0'; ++i) {
+        if (text[i] == '\n') {
+            y++;
+            index(x, y);
+        } else {
+            vram_put(text[i]);
+        }
+    }
 }
 
 #endif
