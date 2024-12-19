@@ -16,10 +16,14 @@ void main(void) {
 	ppu_on_all();
 
 	while (1) {
-		ppu_wait_nmi();
+		start_drawing();
 
-		draw_sprites();
+		draw(sprite);
+		sprite->y += 10;
+		draw(sprite);
+		sprite->y -= 10;
+		sprite->x++;
 
-		// sprite->x++;
+		end_drawing();
 	}
 }
