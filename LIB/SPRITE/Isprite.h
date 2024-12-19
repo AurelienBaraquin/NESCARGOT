@@ -38,13 +38,6 @@ static inline void end_drawing() {
     oam_hide_rest();
 }
 
-static inline void isprite_manager_clear() {
-    unsigned char i;
-    for (i = 0; i < MAX_SPRITES; i++) {
-        isprite_manager[i].data = NULL;
-    }
-}
-
 static inline ISprite *isprite_add(const unsigned char *data, unsigned char x, unsigned char y, draw_sprite draw) {
     unsigned char i;
     ISprite* isprite = NULL;
@@ -61,16 +54,6 @@ static inline ISprite *isprite_add(const unsigned char *data, unsigned char x, u
     }
 
     return isprite;
-}
-
-static inline void draw_all() {
-    unsigned char i;
-
-    for (i = 0; i < MAX_SPRITES; i++) {
-        if (isprite_manager[i].data != NULL) {
-            isprite_manager[i].draw(&isprite_manager[i], isprite_manager[i].x, isprite_manager[i].y);
-        }
-    }
 }
 
 static inline void draw(ISprite* isprite) {
