@@ -101,7 +101,7 @@ RLE_HIGH	=TEMP+1
 RLE_TAG		=TEMP+2
 RLE_BYTE	=TEMP+3
 
-;nesdoug code requires
+;nesapi code requires
 VRAM_INDEX:			.res 1
 META_PTR:			.res 2
 DATA_PTR:			.res 2
@@ -253,7 +253,7 @@ detectNTSC:
 	jmp _main			;no parameters
 
 	.include "LIB/neslib.s"
-	.include "LIB/nesdoug.s"
+	.include "LIB/nesapi.s"
 	.include "MUSIC/famitone2.s"
 	
 	

@@ -2,7 +2,7 @@
 ;with improvements by VEG
 ;Feel free to do anything you want with this code, consider it Public Domain
 
-;for nesdoug version 1.2, 1/1/2022
+;for nesapi version 1.2, 1/1/2022
 ;changed nmi to prevent possible incomplete sprite
 ;added a little bit at the end of _flush_vram_update
 ;changed the name of flush_vram_update_nmi to flush_vram_update2

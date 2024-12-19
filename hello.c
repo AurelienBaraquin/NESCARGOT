@@ -7,7 +7,7 @@
  
  
 #include "LIB/neslib.h"
-#include "LIB/nesdoug.h" 
+#include "LIB/nesapi.h" 
 
 #define BLACK 0x0f
 #define DK_GY 0x00

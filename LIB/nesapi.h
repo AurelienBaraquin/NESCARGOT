@@ -90,7 +90,7 @@ int __fastcall__ get_at_addr(char nt, char x, char y);
 
 
 // the next 4 functions are for my metatile system, as described in my tutorial
-// nesdoug.com
+// nesapi.com
 
 
 void __fastcall__ set_data_pointer(const char * data);
