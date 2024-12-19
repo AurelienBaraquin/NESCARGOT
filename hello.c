@@ -4,7 +4,7 @@
 void main(void) {
 	ppu_off();
 
-	load_palette(PALETTE_BG, PALETTE_COLORFUL);
+	load_palette(PALETTE_BG, PALETTE_GRAY);
 	index(10, 1);
 	write("Coucou\npopo");
 
