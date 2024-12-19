@@ -254,7 +254,7 @@ detectNTSC:
 
 	.include "LIB/neslib.s"
 	.include "LIB/nesapi.s"
-	.include "MUSIC/famitone2.s"
+	.include "LIB/famitone2.s"
 	
 	
 .segment "RODATA"
