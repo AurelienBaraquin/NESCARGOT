@@ -4,5 +4,6 @@
 #include "color.h"
 #include "text.h"
 #include "index.h"
+#include "sprite.h"
 
 #endif

@@ -37,10 +37,13 @@ static const char PALETTE_COLORFUL[] = {
  * @param palette Pointer to a 16-byte array defining the palette.
  */
 static inline void load_palette(PaletteType type, const char* palette) {
-    if (type == PALETTE_BG) {
-        pal_bg(palette);
-    } else if (type == PALETTE_SPRITE) {
-        pal_spr(palette);
+    switch (type) {
+        case PALETTE_BG:
+            pal_bg(palette);
+            break;
+        case PALETTE_SPRITE:
+            pal_spr(palette);
+            break;
     }
 }
 
