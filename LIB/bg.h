@@ -3,6 +3,7 @@
 
 #include "ESSENTIAL/nesc_ess.h"
 #include "box.h"
+#include "SPRITE/Isprite.h"
 
 typedef struct {
     unsigned char map_tile_id;
@@ -83,6 +84,28 @@ static inline bool bg_collide_lower_left(const Box *box, const unsigned char *ma
     tile = _get_map_tile(map[bottom_tile * 32 + left_tile], tiles_map, tiles_map_size);
 
     return tile != 0;
+}
+
+static inline void bg_fix_collision(ISprite *sp, const unsigned char *map, CSVTile *tiles_map, unsigned char tiles_map_size) {
+    Box box;
+
+    sp->box(sp, &box);
+    if (bg_collide_upper_right(&box, map, tiles_map, tiles_map_size)) {
+        sp->y++;
+        sp->x--;
+    }
+    if (bg_collide_upper_left(&box, map, tiles_map, tiles_map_size)) {
+        sp->y++;
+        sp->x++;
+    }
+    if (bg_collide_lower_right(&box, map, tiles_map, tiles_map_size)) {
+        sp->y--;
+        sp->x--;
+    }
+    if (bg_collide_lower_left(&box, map, tiles_map, tiles_map_size)) {
+        sp->y--;
+        sp->x++;
+    }
 }
 
 #endif // __NESC_BG_MANAGER_H__

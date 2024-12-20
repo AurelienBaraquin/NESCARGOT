@@ -23,8 +23,6 @@ void main(void) {
 	ISprite* sp1 = sprite_add(50, 50, &spr);
 	ISprite* sp2 = sprite_add(20, 10, &spr);
 	ISprite* metasprite = metasprite_add(40, 10, &met);
-	unsigned char coll;
-	Box box;
 
 	ppu_off();
 
@@ -39,7 +37,6 @@ void main(void) {
 
 	while (1) {
 		start();
-		sp1->box(sp1, &box);
 
 		if (PAD1.is_pressed(NESC_PAD_UP)) {
 			sp1->y--;
@@ -53,22 +50,7 @@ void main(void) {
 		if (PAD1.is_pressed(NESC_PAD_RIGHT)) {
 			sp1->x++;
 		}
-		if (bg_collide_upper_right(&box, map, tiles, 2)) {
-			sp1->y++;
-			sp1->x--;
-		}
-		if (bg_collide_upper_left(&box, map, tiles, 2)) {
-			sp1->y++;
-			sp1->x++;
-		}
-		if (bg_collide_lower_right(&box, map, tiles, 2)) {
-			sp1->y--;
-			sp1->x--;
-		}
-		if (bg_collide_lower_left(&box, map, tiles, 2)) {
-			sp1->y--;
-			sp1->x++;
-		}
+		bg_fix_collision(sp1, map, tiles, 2);
 
 		draw(metasprite);
 		metasprite->x++;
