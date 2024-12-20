@@ -30,7 +30,6 @@ void main(void) {
 	load_palette(PALETTE_SPRITE, &PALETTE_COLORFUL);
 
 	bank_spr(1);
-	set_scroll_y(0xff);
 	bg_draw(map, tiles, 2);
 
 	ppu_on_all();

@@ -26,6 +26,7 @@ static inline void bg_draw(const unsigned char* map, CSVTile *tiles_map, unsigne
     unsigned char temp_x, temp_y;
     unsigned char tile;
 
+    set_scroll_y(0xff);
     ppu_off();
 
     for(temp_y = 0; temp_y < 30; ++temp_y){
