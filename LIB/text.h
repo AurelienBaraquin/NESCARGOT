@@ -10,9 +10,7 @@
  * @param tile_x chr tile position x.
  * @param tile_y chr tile position y. 4 - 5
  */
-static inline void put(unsigned char tile_x, unsigned char tile_y) {
-    vram_put(tile_y * 16 + tile_x);
-}
+#define PUT(tile) vram_put(tile)
 
 /**
  * @brief Write a string of text to the screen.

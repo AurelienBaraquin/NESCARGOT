@@ -13,14 +13,14 @@
 #define SCREEN_WIDTH 32
 #define SCREEN_HEIGHT 30
 
-static inline void start() {
-    oam_clear();
-    pad_poll_all();
-}
+#define START() do { \
+    oam_clear(); \
+    pad_poll_all(); \
+} while (0)
 
-static inline void end() {
-    ppu_wait_nmi();
-    oam_hide_rest();
-}
+#define END() do { \
+    ppu_wait_nmi(); \
+    oam_hide_rest(); \
+} while (0)
 
 #endif

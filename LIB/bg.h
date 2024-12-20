@@ -11,7 +11,7 @@ typedef struct {
     unsigned char tile_y;
 } CSVTile;
 
-static inline unsigned char _get_map_tile(unsigned char id, CSVTile *tile_map, unsigned char tile_map_size) {
+static inline unsigned char get_map_tile(unsigned char id, CSVTile *tile_map, unsigned char tile_map_size) {
     unsigned char i;
 
     for (i = 0; i < tile_map_size; ++i) {

@@ -34,17 +34,17 @@ void main(void) {
 
 	BG_DRAW(px, py, p, 2, 2,
 		index(px, py);
-		vram_put(_get_map_tile(map[p], tiles, 2));
-		vram_put(_get_map_tile(map[p], tiles, 2));
+		PUT(get_map_tile(map[p], tiles, 2));
+		PUT(get_map_tile(map[p], tiles, 2));
 		index(px, py + 1);
-		vram_put(_get_map_tile(map[p], tiles, 2));
-		vram_put(_get_map_tile(map[p], tiles, 2));
+		PUT(get_map_tile(map[p], tiles, 2));
+		PUT(get_map_tile(map[p], tiles, 2));
 	);
 
 	ppu_on_all();
 
 	while (1) {
-		start();
+		START();
 
 		if (PAD1.is_pressed(NESC_PAD_UP)) {
 			sp1->y--;
@@ -64,6 +64,6 @@ void main(void) {
 		draw(sp1);
 		draw(sp2);
 
-		end();
+		END();
 	}
 }
