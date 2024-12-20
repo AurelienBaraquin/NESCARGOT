@@ -18,7 +18,7 @@ with open(filename, 'r') as oldfile:
   your_list = list(reader)
 
 newfile = open(newname, 'w')  # warning, this may overwrite old file !
-newfile.write("const unsigned char " + newname2 + "[]={\n")
+newfile.write("unsigned char " + newname2 + "[]={\n")
 
 rows = len(your_list)
 columns = len(your_list[0])

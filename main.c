@@ -23,6 +23,7 @@ void main(void) {
 	ISprite* sp1 = sprite_add(50, 50, &spr);
 	ISprite* sp2 = sprite_add(20, 10, &spr);
 	ISprite* metasprite = metasprite_add(40, 10, &met);
+	unsigned char px, py, p;
 
 	ppu_off();
 
@@ -30,7 +31,15 @@ void main(void) {
 	load_palette(PALETTE_SPRITE, &PALETTE_COLORFUL);
 
 	bank_spr(1);
-	bg_draw(map, tiles, 2);
+
+	BG_DRAW(px, py, p, 2, 2,
+		index(px, py);
+		vram_put(_get_map_tile(map[p], tiles, 2));
+		vram_put(_get_map_tile(map[p], tiles, 2));
+		index(px, py + 1);
+		vram_put(_get_map_tile(map[p], tiles, 2));
+		vram_put(_get_map_tile(map[p], tiles, 2));
+	);
 
 	ppu_on_all();
 
@@ -49,7 +58,6 @@ void main(void) {
 		if (PAD1.is_pressed(NESC_PAD_RIGHT)) {
 			sp1->x++;
 		}
-		bg_fix_collision(sp1, map, tiles, 2);
 
 		draw(metasprite);
 		metasprite->x++;

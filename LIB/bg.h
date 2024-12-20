@@ -22,91 +22,33 @@ static inline unsigned char _get_map_tile(unsigned char id, CSVTile *tile_map, u
     return 0;
 }
 
-static inline void bg_draw(const unsigned char* map, CSVTile *tiles_map, unsigned char tiles_map_size) {
-    unsigned char temp_x, temp_y;
-    unsigned char tile;
+// static inline void bg_draw(const unsigned char* map, CSVTile *tiles_map, unsigned char tiles_map_size) {
+//     unsigned char tile;
+//     unsigned char temp_x, temp_y, temp1;
 
-    set_scroll_y(0xff);
-    ppu_off();
+//     set_scroll_y(0xff);
+//     ppu_off();
 
-    for(temp_y = 0; temp_y < 30; ++temp_y){
-        for(temp_x = 0; temp_x < 32; ++temp_x){
-            tile = _get_map_tile(map[temp_y * 32 + temp_x], tiles_map, tiles_map_size);
-            vram_put(tile);
-        }
-    }
+// 	for(temp_y = 0; temp_y < 16; ++temp_y){
+// 		for(temp_x = 0; temp_x < 16; ++temp_x){
+// 			temp1 = (temp_y << 4) + temp_x;
+//             vram_put(_get_map_tile(map[temp1], tiles_map, tiles_map_size));
+//             vram_put(_get_map_tile(map[temp1], tiles_map, tiles_map_size));
+// 		}
+// 	}
 
+//     ppu_on_all();
+// }
+
+#define BG_DRAW(px, py, p, px_it, py_it, x) \
+    set_scroll_y(0xff); \
+    ppu_off(); \
+    for(py = 0; py / py_it < 15; py += py_it){ \
+        for(px = 0; px / px_it < 16; px += px_it){ \
+            p = (py / py_it << 4) + px / px_it; \
+            x \
+        } \
+    } \
     ppu_on_all();
-}
-
-static inline bool bg_collide_upper_right(const Box *box, const unsigned char *map, CSVTile *tiles_map, unsigned char tiles_map_size) {
-    unsigned char tile;
-    unsigned char right_tile, top_tile;
-
-    right_tile = (box->x + box->width - 1) / 8;
-    top_tile = box->y / 8;
-
-    tile = _get_map_tile(map[top_tile * 32 + right_tile], tiles_map, tiles_map_size);
-
-    return tile != 0;
-}
-
-static inline bool bg_collide_upper_left(const Box *box, const unsigned char *map, CSVTile *tiles_map, unsigned char tiles_map_size) {
-    unsigned char tile;
-    unsigned char left_tile, top_tile;
-
-    left_tile = box->x / 8;
-    top_tile = box->y / 8;
-
-    tile = _get_map_tile(map[top_tile * 32 + left_tile], tiles_map, tiles_map_size);
-
-    return tile != 0;
-}
-
-static inline bool bg_collide_lower_right(const Box *box, const unsigned char *map, CSVTile *tiles_map, unsigned char tiles_map_size) {
-    unsigned char tile;
-    unsigned char right_tile, bottom_tile;
-
-    right_tile = (box->x + box->width - 1) / 8;
-    bottom_tile = (box->y + box->height - 1) / 8;
-
-    tile = _get_map_tile(map[bottom_tile * 32 + right_tile], tiles_map, tiles_map_size);
-
-    return tile != 0;
-}
-
-static inline bool bg_collide_lower_left(const Box *box, const unsigned char *map, CSVTile *tiles_map, unsigned char tiles_map_size) {
-    unsigned char tile;
-    unsigned char left_tile, bottom_tile;
-
-    left_tile = box->x / 8;
-    bottom_tile = (box->y + box->height - 1) / 8;
-
-    tile = _get_map_tile(map[bottom_tile * 32 + left_tile], tiles_map, tiles_map_size);
-
-    return tile != 0;
-}
-
-static inline void bg_fix_collision(ISprite *sp, const unsigned char *map, CSVTile *tiles_map, unsigned char tiles_map_size) {
-    Box box;
-
-    sp->box(sp, &box);
-    if (bg_collide_upper_right(&box, map, tiles_map, tiles_map_size)) {
-        sp->y++;
-        sp->x--;
-    }
-    if (bg_collide_upper_left(&box, map, tiles_map, tiles_map_size)) {
-        sp->y++;
-        sp->x++;
-    }
-    if (bg_collide_lower_right(&box, map, tiles_map, tiles_map_size)) {
-        sp->y--;
-        sp->x--;
-    }
-    if (bg_collide_lower_left(&box, map, tiles_map, tiles_map_size)) {
-        sp->y--;
-        sp->x++;
-    }
-}
 
 #endif // __NESC_BG_MANAGER_H__
