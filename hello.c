@@ -16,6 +16,7 @@ Sprite spr = {0x00, NO_FLIP};
 void main(void) {
 	ISprite* sprite = sprite_add(10, 10, &spr);
 	ISprite* metasprite = metasprite_add(40, 10, &met);
+	unsigned char i, j;
 
 	ppu_off();
 
@@ -23,7 +24,7 @@ void main(void) {
 	load_palette(PALETTE_SPRITE, PALETTE_COLORFUL);
 
 	bank_spr(1);
-	index(10, 1);
+	index(10, 10);
 	write("Coucou\nHello\n");
 
 	ppu_on_all();

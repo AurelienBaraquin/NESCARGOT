@@ -8,4 +8,7 @@
 #include "SPRITE/metasprite.h"
 #include "SPRITE/Isprite.h"
 
+#define SCREEN_WIDTH 32
+#define SCREEN_HEIGHT 30
+
 #endif
