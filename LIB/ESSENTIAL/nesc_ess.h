@@ -4,6 +4,8 @@
 #include "ESSENTIAL/neslib.h"
 #include "ESSENTIAL/nesapi.h"
 
+#define bool unsigned char
+
 int _ppu_addr(int mode, int x, int y) {
     static struct {
         unsigned char x;

@@ -20,8 +20,8 @@ void main(void) {
 
 	ppu_off();
 
-	load_palette(PALETTE_BG, PALETTE_GRAY);
-	load_palette(PALETTE_SPRITE, PALETTE_COLORFUL);
+	load_palette(PALETTE_BG, &PALETTE_GRAY);
+	load_palette(PALETTE_SPRITE, &PALETTE_COLORFUL);
 
 	bank_spr(1);
 	index(10, 10);
@@ -56,6 +56,12 @@ void main(void) {
 		}
 		if (PAD2.is_pressed(NESC_PAD_DOWN)) {
 			sp2->y++;
+		}
+
+		if (collide(sp1, sp2)) {
+			set_palette_color(0x03, RED);
+		} else {
+			set_palette_color(0x03, WHITE);
 		}
 
 		draw(metasprite);

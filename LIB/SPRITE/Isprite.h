@@ -18,18 +18,27 @@ typedef enum {
 
 typedef struct ISprite ISprite;
 
+struct Box {
+	unsigned char x;
+	unsigned char y;
+	unsigned char width;
+	unsigned char height;
+};
+
 typedef void (*draw_sprite)(ISprite*, unsigned char, unsigned char);
+typedef void (*hitbox)(ISprite*, struct Box*);
 
 struct ISprite {
     const unsigned char *data;
     unsigned char x;
     unsigned char y;
     draw_sprite draw;
+    hitbox box;
 };
 
 static ISprite isprite_manager[MAX_SPRITES];
 
-static inline ISprite *isprite_add(const unsigned char *data, unsigned char x, unsigned char y, draw_sprite draw) {
+static inline ISprite *isprite_add(const unsigned char *data, unsigned char x, unsigned char y, draw_sprite draw, hitbox box) {
     unsigned char i;
     ISprite* isprite = NULL;
 
@@ -40,11 +49,20 @@ static inline ISprite *isprite_add(const unsigned char *data, unsigned char x, u
             isprite->x = x;
             isprite->y = y;
             isprite->draw = draw;
+            isprite->box = box;
             break;
         }
     }
 
     return isprite;
+}
+
+bool collide(ISprite* isprite1, ISprite* isprite2) {
+    struct Box box1, box2;
+    isprite1->box(isprite1, &box1);
+    isprite2->box(isprite2, &box2);
+
+    return check_collision(&box1, &box2);
 }
 
 static inline void draw(ISprite* isprite) {

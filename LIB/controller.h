@@ -15,8 +15,6 @@
     #define PAD_RIGHT		0x01
 #endif
 
-#define bool unsigned char
-
 typedef enum {
     NESC_PAD_A = PAD_A,
     NESC_PAD_B = PAD_B,

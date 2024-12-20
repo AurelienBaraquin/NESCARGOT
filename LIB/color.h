@@ -14,20 +14,48 @@ typedef enum {
     PALETTE_SPRITE   // Sprite palette ($3F10-$3F1F)
 } PaletteType;
 
+typedef struct Palette {
+    union {
+        struct {
+            char c1;
+            char c2;
+            char c3;
+            char c4;
+            char c5;
+            char c6;
+            char c7;
+            char c8;
+            char c9;
+            char c10;
+            char c11;
+            char c12;
+            char c13;
+            char c14;
+            char c15;
+            char c16;
+        };
+        char colors[16];
+    };
+} Palette;
+
 // Example BG palette: grayscale (white, light gray, dark gray, black)
-static const char PALETTE_GRAY[] = {
-    BLACK, LIGHT_GRAY, DARK_GRAY, WHITE,
-    0, 0, 0, 0,
-    0, 0, 0, 0,
-    0, 0, 0, 0
+static const Palette PALETTE_GRAY = {
+    {
+        BLACK, LIGHT_GRAY, DARK_GRAY, WHITE
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0
+    }
 };
 
 // Example SPRITE palette: transparent, red, blue, green
-static const char PALETTE_COLORFUL[] = {
-    BLACK, RED, BLUE, GREEN,
-    BLACK, BLACK, YELLOW, WHITE,
-    0, 0, 0, 0,
-    0, 0, 0, 0
+static const Palette PALETTE_COLORFUL = {
+    {
+        BLACK, RED, BLUE, GREEN
+        , BLACK, BLACK, YELLOW, WHITE
+        , 0, 0, 0, 0
+        , 0, 0, 0, 0
+    }
 };
 
 /**
@@ -36,13 +64,13 @@ static const char PALETTE_COLORFUL[] = {
  * @param type Palette type (PALETTE_BG or PALETTE_SPRITE).
  * @param palette Pointer to a 16-byte array defining the palette.
  */
-static inline void load_palette(PaletteType type, const char* palette) {
+static inline void load_palette(PaletteType type, const Palette* palette) {
     switch (type) {
         case PALETTE_BG:
-            pal_bg(palette);
+            pal_bg(palette->colors);
             break;
         case PALETTE_SPRITE:
-            pal_spr(palette);
+            pal_spr(palette->colors);
             break;
     }
 }
@@ -61,14 +89,16 @@ static inline void set_palette_color(unsigned char index, Color color) {
  * @brief Reset palettes to default (black for all colors).
  */
 static inline void reset_palettes() {
-    const char default_palette[16] = {
-        BLACK, BLACK, BLACK, BLACK,
-        BLACK, BLACK, BLACK, BLACK,
-        BLACK, BLACK, BLACK, BLACK,
-        BLACK, BLACK, BLACK, BLACK
+    const Palette default_palette = {
+        {
+            BLACK, BLACK, BLACK, BLACK
+            , BLACK, BLACK, BLACK, BLACK
+            , BLACK, BLACK, BLACK, BLACK
+            , BLACK, BLACK, BLACK, BLACK
+        }
     };
-    load_palette(PALETTE_BG, default_palette);
-    load_palette(PALETTE_SPRITE, default_palette);
+    load_palette(PALETTE_BG, &default_palette);
+    load_palette(PALETTE_SPRITE, &default_palette);
 }
 
 #endif // __NESC_COLOR_H__
