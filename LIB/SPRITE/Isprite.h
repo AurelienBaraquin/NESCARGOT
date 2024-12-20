@@ -29,15 +29,6 @@ struct ISprite {
 
 static ISprite isprite_manager[MAX_SPRITES];
 
-static inline void start_drawing() {
-    oam_clear();
-}
-
-static inline void end_drawing() {
-    ppu_wait_nmi();
-    oam_hide_rest();
-}
-
 static inline ISprite *isprite_add(const unsigned char *data, unsigned char x, unsigned char y, draw_sprite draw) {
     unsigned char i;
     ISprite* isprite = NULL;

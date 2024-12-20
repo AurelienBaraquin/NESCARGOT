@@ -14,9 +14,9 @@ Metasprite met = {
 Sprite spr = {0x00, NO_FLIP};
 
 void main(void) {
-	ISprite* sprite = sprite_add(10, 10, &spr);
+	ISprite* sp1 = sprite_add(10, 10, &spr);
+	ISprite* sp2 = sprite_add(20, 10, &spr);
 	ISprite* metasprite = metasprite_add(40, 10, &met);
-	unsigned char i, j;
 
 	ppu_off();
 
@@ -30,16 +30,39 @@ void main(void) {
 	ppu_on_all();
 
 	while (1) {
-		start_drawing();
+		start();
+
+		if (PAD1.is_pressed(NESC_PAD_LEFT)) {
+			sp1->x--;
+		}
+		if (PAD1.is_pressed(NESC_PAD_RIGHT)) {
+			sp1->x++;
+		}
+		if (PAD1.is_pressed(NESC_PAD_UP)) {
+			sp1->y--;
+		}
+		if (PAD1.is_pressed(NESC_PAD_DOWN)) {
+			sp1->y++;
+		}
+
+		if (PAD2.is_pressed(NESC_PAD_LEFT)) {
+			sp2->x--;
+		}
+		if (PAD2.is_pressed(NESC_PAD_RIGHT)) {
+			sp2->x++;
+		}
+		if (PAD2.is_pressed(NESC_PAD_UP)) {
+			sp2->y--;
+		}
+		if (PAD2.is_pressed(NESC_PAD_DOWN)) {
+			sp2->y++;
+		}
 
 		draw(metasprite);
 		metasprite->x++;
-		draw(sprite);
-		sprite->y += 10;
-		draw(sprite);
-		sprite->y -= 10;
-		sprite->x++;
+		draw(sp1);
+		draw(sp2);
 
-		end_drawing();
+		end();
 	}
 }

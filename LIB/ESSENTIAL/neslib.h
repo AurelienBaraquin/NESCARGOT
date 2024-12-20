@@ -270,15 +270,17 @@ void __fastcall__ memfill(void *dst,unsigned char value,unsigned int len);
 void __fastcall__ delay(unsigned char frames);
 
 
-
-#define PAD_A			0x80
-#define PAD_B			0x40
-#define PAD_SELECT		0x20
-#define PAD_START		0x10
-#define PAD_UP			0x08
-#define PAD_DOWN		0x04
-#define PAD_LEFT		0x02
-#define PAD_RIGHT		0x01
+#ifndef _NESLIB_PADS_H
+#define _NESLIB_PADS_H
+    #define PAD_A			0x80
+    #define PAD_B			0x40
+    #define PAD_SELECT		0x20
+    #define PAD_START		0x10
+    #define PAD_UP			0x08
+    #define PAD_DOWN		0x04
+    #define PAD_LEFT		0x02
+    #define PAD_RIGHT		0x01
+#endif
 
 #define OAM_FLIP_V		0x80
 #define OAM_FLIP_H		0x40

@@ -7,8 +7,19 @@
 #include "SPRITE/sprite.h"
 #include "SPRITE/metasprite.h"
 #include "SPRITE/Isprite.h"
+#include "controller.h"
 
 #define SCREEN_WIDTH 32
 #define SCREEN_HEIGHT 30
+
+static inline void start() {
+    oam_clear();
+    pad_poll_all();
+}
+
+static inline void end() {
+    ppu_wait_nmi();
+    oam_hide_rest();
+}
 
 #endif
