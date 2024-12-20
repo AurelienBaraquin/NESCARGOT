@@ -1,4 +1,5 @@
 #include "LIB/nesc.h"
+#include "main.h"
 #pragma bss-name(push, "ZEROPAGE")
 
 Metasprite met = {
@@ -13,10 +14,17 @@ Metasprite met = {
 
 Sprite spr = {0x00, NO_FLIP};
 
+CSVTile tiles[] = {
+	{0, 0, 0},
+	{1, 0, 1}
+};
+
 void main(void) {
-	ISprite* sp1 = sprite_add(10, 10, &spr);
+	ISprite* sp1 = sprite_add(50, 50, &spr);
 	ISprite* sp2 = sprite_add(20, 10, &spr);
 	ISprite* metasprite = metasprite_add(40, 10, &met);
+	unsigned char coll;
+	Box box;
 
 	ppu_off();
 
@@ -24,44 +32,42 @@ void main(void) {
 	load_palette(PALETTE_SPRITE, &PALETTE_COLORFUL);
 
 	bank_spr(1);
-	index(10, 10);
-	write("Coucou\nHello\n");
+	set_scroll_y(0xff);
+	bg_draw(map, tiles, 2);
 
 	ppu_on_all();
 
 	while (1) {
 		start();
+		sp1->box(sp1, &box);
 
-		if (PAD1.is_pressed(NESC_PAD_LEFT)) {
-			sp1->x--;
-		}
-		if (PAD1.is_pressed(NESC_PAD_RIGHT)) {
-			sp1->x++;
-		}
 		if (PAD1.is_pressed(NESC_PAD_UP)) {
 			sp1->y--;
 		}
 		if (PAD1.is_pressed(NESC_PAD_DOWN)) {
 			sp1->y++;
 		}
-
-		if (PAD2.is_pressed(NESC_PAD_LEFT)) {
-			sp2->x--;
+		if (PAD1.is_pressed(NESC_PAD_LEFT)) {
+			sp1->x--;
 		}
-		if (PAD2.is_pressed(NESC_PAD_RIGHT)) {
-			sp2->x++;
+		if (PAD1.is_pressed(NESC_PAD_RIGHT)) {
+			sp1->x++;
 		}
-		if (PAD2.is_pressed(NESC_PAD_UP)) {
-			sp2->y--;
+		if (bg_collide_upper_right(&box, map, tiles, 2)) {
+			sp1->y++;
+			sp1->x--;
 		}
-		if (PAD2.is_pressed(NESC_PAD_DOWN)) {
-			sp2->y++;
+		if (bg_collide_upper_left(&box, map, tiles, 2)) {
+			sp1->y++;
+			sp1->x++;
 		}
-
-		if (collide(sp1, sp2)) {
-			set_palette_color(0x03, RED);
-		} else {
-			set_palette_color(0x03, WHITE);
+		if (bg_collide_lower_right(&box, map, tiles, 2)) {
+			sp1->y--;
+			sp1->x--;
+		}
+		if (bg_collide_lower_left(&box, map, tiles, 2)) {
+			sp1->y--;
+			sp1->x++;
 		}
 
 		draw(metasprite);

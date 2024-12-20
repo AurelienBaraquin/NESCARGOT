@@ -2,6 +2,7 @@
 #define __I_SPRITE_NESC_H__
 
 #include "ESSENTIAL/nesc_ess.h"
+#include "../box.h"
 
 typedef enum {
     NO_FLIP = 0,
@@ -17,13 +18,6 @@ typedef enum {
 } SpriteType;
 
 typedef struct ISprite ISprite;
-
-struct Box {
-	unsigned char x;
-	unsigned char y;
-	unsigned char width;
-	unsigned char height;
-};
 
 typedef void (*draw_sprite)(ISprite*, unsigned char, unsigned char);
 typedef void (*hitbox)(ISprite*, struct Box*);

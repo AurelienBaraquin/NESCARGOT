@@ -5,6 +5,8 @@
 #include "ESSENTIAL/nesapi.h"
 
 #define bool unsigned char
+#define true 1
+#define false 0
 
 int _ppu_addr(int mode, int x, int y) {
     static struct {

@@ -1,7 +1,11 @@
 @echo off
-set name="hello"
+set name="main"
 set path=%path%;..\bin\
 set CC65_HOME=..\
+
+for %%f in (CSV\*.csv) do (
+    python .\LIB\TOOLS\CSV2C.py %%f
+)
 
 cc65 -Oirs %name%.c --add-source
 ca65 crt0.s
