@@ -47,21 +47,27 @@ static inline void metasprite_draw(ISprite* sprite, unsigned char x, unsigned ch
 
 static inline void metasprite_hitbox(ISprite* sprite, struct Box* box) {
     Metasprite *metasprite = (Metasprite*)sprite->data;
-    unsigned char maxy = 0, maxx = 0;
     const MetaspriteFrame *frame;
     unsigned char i = 0;
+    unsigned char min_x = 255, min_y = 255;
+    unsigned char max_x = 0, max_y = 0;
 
     while (i < MAX_METASPRITES_FRAME && metasprite->frames[i].tile != 128) {
         frame = &metasprite->frames[i];
-        if (frame->x > maxx) maxx = frame->x;
-        if (frame->y > maxy) maxy = frame->y;
+
+        if (frame->x < min_x) min_x = frame->x;
+        if (frame->y < min_y) min_y = frame->y;
+
+        if (frame->x + 8 > max_x) max_x = frame->x + 8;
+        if (frame->y + 8 > max_y) max_y = frame->y + 8;
+
         i++;
     }
 
-    box->x = sprite->x;
-    box->y = sprite->y;
-    box->width = maxx;
-    box->height = maxy;
+    box->x = sprite->x + min_x;
+    box->y = sprite->y + min_y;
+    box->width = max_x - min_x;
+    box->height = max_y - min_y;
 }
 
 /**

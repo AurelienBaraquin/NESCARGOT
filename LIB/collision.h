@@ -29,33 +29,34 @@ typedef struct {
  * @param map Pointer to the background map.
  * @return CollisionResult The collision result containing flags and tile IDs.
  */
-void check_collision_bg(unsigned char x, unsigned char y, unsigned char *map, CollisionResult* result) {
+void check_collision_bg(Box *box, unsigned char *map, CollisionResult* result) {
     unsigned char tx, ty, p;
 
     memfill(result, 0, sizeof(CollisionResult));
-    tx = x;
-    ty = y;
+
+    tx = box->x;
+    ty = box->y;
     p = (tx >> 4) + (ty & 0xf0);
     if (map[p] != 0) {
         result->ul = map[p];
     }
 
-    tx = x + 7;
-    ty = y;
+    tx = box->x + (box->width - 1);
+    ty = box->y;
     p = (tx >> 4) + (ty & 0xf0);
     if (map[p] != 0) {
         result->ur = map[p];
     }
 
-    tx = x;
-    ty = y + 7;
+    tx = box->x;
+    ty = box->y + (box->height - 1);
     p = (tx >> 4) + (ty & 0xf0);
     if (map[p] != 0) {
         result->dl = map[p];
     }
 
-    tx = x + 7;
-    ty = y + 7;
+    tx = box->x + (box->width - 1);
+    ty = box->y + (box->height - 1);
     p = (tx >> 4) + (ty & 0xf0);
     if (map[p] != 0) {
         result->dr = map[p];
