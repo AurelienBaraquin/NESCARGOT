@@ -22,24 +22,6 @@ static inline unsigned char get_map_tile(unsigned char id, CSVTile *tile_map, un
     return 0;
 }
 
-// static inline void bg_draw(const unsigned char* map, CSVTile *tiles_map, unsigned char tiles_map_size) {
-//     unsigned char tile;
-//     unsigned char temp_x, temp_y, temp1;
-
-//     set_scroll_y(0xff);
-//     ppu_off();
-
-// 	for(temp_y = 0; temp_y < 16; ++temp_y){
-// 		for(temp_x = 0; temp_x < 16; ++temp_x){
-// 			temp1 = (temp_y << 4) + temp_x;
-//             vram_put(_get_map_tile(map[temp1], tiles_map, tiles_map_size));
-//             vram_put(_get_map_tile(map[temp1], tiles_map, tiles_map_size));
-// 		}
-// 	}
-
-//     ppu_on_all();
-// }
-
 #define BG_DRAW(px, py, p, px_it, py_it, x) \
     set_scroll_y(0xff); \
     ppu_off(); \

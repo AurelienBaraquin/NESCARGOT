@@ -23,11 +23,9 @@
  * @param x X coordinate (tile position 0-31).
  * @param y Y coordinate (tile position 0-29).
  */
-#define index(x, y) do { \
-    if ((x) <= 31 && (y) <= 29) { \
-        vram_adr(NTADR_A((x), (y))); \
-        _ppu_addr(0, (x), (y)); \
-    } \
-} while (0)
+void index(int x, int y) {
+    vram_adr(NTADR_A(x, y));
+    _ppu_addr(0, x, y);
+}
 
 #endif

@@ -23,6 +23,7 @@ void main(void) {
 	ISprite* sp1 = sprite_add(50, 50, &spr);
 	ISprite* sp2 = sprite_add(20, 10, &spr);
 	ISprite* metasprite = metasprite_add(40, 10, &met);
+	CollisionResult result;
 	unsigned char px, py, p;
 
 	ppu_off();
@@ -57,6 +58,24 @@ void main(void) {
 		}
 		if (PAD1.is_pressed(NESC_PAD_RIGHT)) {
 			sp1->x++;
+		}
+
+		check_collision_bg(sp1->x, sp1->y, map, &result);
+		if (result.ul != 0) {
+			sp1->y++;
+			sp1->x++;
+		}
+		if (result.ur != 0) {
+			sp1->y++;
+			sp1->x--;
+		}
+		if (result.dl != 0) {
+			sp1->y--;
+			sp1->x++;
+		}
+		if (result.dr != 0) {
+			sp1->y--;
+			sp1->x--;
 		}
 
 		draw(metasprite);

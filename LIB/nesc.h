@@ -9,6 +9,7 @@
 #include "SPRITE/Isprite.h"
 #include "controller.h"
 #include "bg.h"
+#include "collision.h"
 
 #define SCREEN_WIDTH 32
 #define SCREEN_HEIGHT 30

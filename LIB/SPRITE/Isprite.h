@@ -51,14 +51,6 @@ static inline ISprite *isprite_add(const unsigned char *data, unsigned char x, u
     return isprite;
 }
 
-bool collide(ISprite* isprite1, ISprite* isprite2) {
-    struct Box box1, box2;
-    isprite1->box(isprite1, &box1);
-    isprite2->box(isprite2, &box2);
-
-    return check_collision(&box1, &box2);
-}
-
 static inline void draw(ISprite* isprite) {
     isprite->draw(isprite, isprite->x, isprite->y);
 }
