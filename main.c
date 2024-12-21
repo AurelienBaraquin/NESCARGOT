@@ -16,7 +16,8 @@ Sprite spr = {0x00, NO_FLIP};
 
 CSVTile tiles[] = {
 	{0, 0, 0},
-	{1, 0, 1}
+	{1, 0, 1},
+	CSV_END
 };
 
 void main(void) {
@@ -35,11 +36,11 @@ void main(void) {
 
 	BG_DRAW(px, py, p, 2, 2,
 		index(px, py);
-		PUT(get_map_tile(map[p], tiles, 2));
-		PUT(get_map_tile(map[p], tiles, 2));
+		PUT(get_map_tile(map[p], tiles));
+		PUT(get_map_tile(map[p], tiles));
 		index(px, py + 1);
-		PUT(get_map_tile(map[p], tiles, 2));
-		PUT(get_map_tile(map[p], tiles, 2));
+		PUT(get_map_tile(map[p], tiles));
+		PUT(get_map_tile(map[p], tiles));
 	);
 
 	ppu_on_all();
@@ -66,7 +67,7 @@ void main(void) {
 			sp1->x++;
 		}
 		if (result.ur != 0) {
-			sp1->y++;
+			sp1->y++;	
 			sp1->x--;
 		}
 		if (result.dl != 0) {

@@ -11,10 +11,12 @@ typedef struct {
     unsigned char tile_y;
 } CSVTile;
 
-static inline unsigned char get_map_tile(unsigned char id, CSVTile *tile_map, unsigned char tile_map_size) {
+#define CSV_END {255, 255, 255}
+
+static inline unsigned char get_map_tile(unsigned char id, CSVTile *tile_map) {
     unsigned char i;
 
-    for (i = 0; i < tile_map_size; ++i) {
+    for (i = 0; tile_map[i].map_tile_id != 255 && tile_map[i].tile_x != 255 && tile_map[i].tile_y != 255; ++i) {
         if (tile_map[i].map_tile_id == id) {
             return tile_map[i].tile_y * 16 + tile_map[i].tile_x;
         }
