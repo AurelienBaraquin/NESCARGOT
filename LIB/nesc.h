@@ -14,6 +14,10 @@
 #define SCREEN_WIDTH 32
 #define SCREEN_HEIGHT 30
 
+#define POS_TO_MAP(x, y, map_width) (((y / 8) << 4) + (x / 8))
+
+#define POS_TO_ADDR(x, y) (NTADR_A(x / 8, y / 8))
+
 #define START() do { \
     oam_clear(); \
     pad_poll_all(); \

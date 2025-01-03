@@ -12,6 +12,12 @@
  */
 #define PUT(tile) vram_put(tile)
 
+void put(unsigned char tile, unsigned char x, unsigned char y) {
+    if (x < 32 && y < 30) {
+        one_vram_buffer(tile, NTADR_A(x, y));
+    }
+}
+
 /**
  * @brief Write a string of text to the screen.
  * 
