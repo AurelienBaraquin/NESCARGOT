@@ -8,6 +8,8 @@
 #define true 1
 #define false 0
 
+#define DIVIDE(a, b) ((a) == 0 ? 0 : (a) / (b))
+
 int _ppu_addr(int mode, int x, int y) {
     static struct {
         unsigned char x;

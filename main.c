@@ -20,9 +20,24 @@ CSVTile tiles[] = {
 	CSV_END
 };
 
+unsigned char tmp;
+
+void put_nbr(unsigned char n, unsigned char x, unsigned char y) {
+	unsigned char i = 0;
+	unsigned char digits[3] = {0, 0, 0};
+
+	while (n > 0) {
+		digits[i++] = n % 10;
+		n /= 10;
+	}
+	one_vram_buffer(digits[2] + '0', NTADR_A(x++, y));
+	one_vram_buffer(digits[1] + '0', NTADR_A(x++, y));
+	one_vram_buffer(digits[0] + '0', NTADR_A(x++, y));
+}
+
 void main(void) {
-	ISprite* sp1 = sprite_add(20, 10, &spr);
-	ISprite* sp2 = metasprite_add(40, 50, &met);
+	ISprite* sp1 = sprite_add(30, 70, &spr);
+	ISprite* sp2 = metasprite_add(40, 60, &met);
 	Box box;
 	CollisionResult result;
 	unsigned char px, py, p;
@@ -45,8 +60,14 @@ void main(void) {
 
 	ppu_on_all();
 
+	set_vram_buffer();
+
 	while (1) {
 		START();
+
+		put('0', 1, 1);
+		put('0', 2, 1);
+		put('0', 3, 1);
 
 		sp1->box(sp1, &box);
 
@@ -64,22 +85,29 @@ void main(void) {
 		}
 
 		check_collision_bg(&box, map, &result);
-		if (result.ul != 0) {
-			sp1->y++;
-			sp1->x++;
+		if (result.ul != 0 && result.ur != 0) {
+			map[POS_TO_MAP(box.x, box.y, 16)] = 0;
+			// map[POS_TO_MAP(box.x + 1, box.y, 16)] = 0;
+			// map[POS_TO_MAP(box.x, box.y + 1, 16)] = 0;
+			// map[POS_TO_MAP(box.x + 1, box.y + 1, 16)] = 0;
+
+			put('0', DIVIDE(box.x, 8), DIVIDE(box.y, 8));
+			// put('0', box.x / 8 + 1, box.y / 8);
+			// put('0', box.x / 8, box.y / 8 + 1);
+			// put('0', box.x / 8 + 1, box.y / 8 + 1);
+
+			put_nbr(POS_TO_MAP(box.x, box.y, 16), 1, 1);
 		}
-		if (result.ur != 0) {
-			sp1->y++;	
-			sp1->x--;
-		}
-		if (result.dl != 0) {
-			sp1->y--;
-			sp1->x++;
-		}
-		if (result.dr != 0) {
-			sp1->y--;
-			sp1->x--;
-		}
+		// if (result.dl != 0) {
+		// 	sp1->y--;
+		// 	sp1->x++;
+		// }
+		// if (result.dr != 0) {
+		// 	sp1->y--;
+		// 	sp1->x--;
+		// }
+
+		oam_clear();
 
 		draw(sp1);
 		draw(sp2);
