@@ -9,6 +9,8 @@ void main(void) {
 	while (1) {
         START();
         put_str("Hello\nWorld!", 10, 10);
+        put('A', 10, 20);
+        put('X', 1, 2);
         END();
     }
 }
