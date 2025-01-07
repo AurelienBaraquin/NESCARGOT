@@ -18,6 +18,21 @@ void put(unsigned char tile, unsigned char x, unsigned char y) {
     }
 }
 
+void put_str(const char* str, unsigned char x, unsigned char y) {
+    unsigned char i = 0;
+    unsigned char xx = x;
+
+    for (i = 0; str[i] != '\0'; ++i) {
+        if (str[i] == '\n') {
+            y++;
+            xx = x;
+        } else {
+            put(str[i], xx, y);
+            xx++;
+        }
+    }
+}
+
 /**
  * @brief Write a string of text to the screen.
  * 

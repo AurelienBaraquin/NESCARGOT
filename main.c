@@ -107,8 +107,6 @@ void main(void) {
 		// 	sp1->x--;
 		// }
 
-		oam_clear();
-
 		draw(sp1);
 		draw(sp2);
 

@@ -18,6 +18,14 @@
 
 #define POS_TO_ADDR(x, y) (NTADR_A(x / 8, y / 8))
 
+#define INIT() \
+    do { \
+        ppu_off(); \
+        bank_spr(1); \
+        ppu_on_all(); \
+        set_vram_buffer(); \
+    } while (0)
+
 #define START() do { \
     oam_clear(); \
     pad_poll_all(); \
