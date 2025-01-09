@@ -12,7 +12,13 @@
  * @return true If the sprites are colliding.
  * @return false If the sprites are not colliding.
  */
-bool is_colliding(ISprite* sp1, ISprite* sp2);
+bool is_colliding(ISprite* sp1, ISprite* sp2) {
+    Box box1, box2;
+    sp1->box(sp1, &box1);
+    sp2->box(sp2, &box2);
+
+    return check_collision(&box1, &box2);
+}
 
 typedef struct {
     unsigned char ul;     // Tile ID for upper-left collision
