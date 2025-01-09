@@ -9,6 +9,7 @@ void main(void) {
 	ISprite* sp2 = sprite_add(40, 60, &spr);
 	Box box1;
     Box box2;
+
     INIT();
 
 	load_palette(PALETTE_BG, &PALETTE_COLORFUL);
@@ -20,9 +21,9 @@ void main(void) {
         sp2->box(sp2, &box2);
 
         if (check_collision(&box1, &box2)) {
-            pal_col(0, 0x30);
+            set_palette_color(0, YELLOW);
         } else {
-			pal_col(0, 0x00);
+			set_palette_color(0, RED);
 		}
 
 		if (PAD1.is_pressed(NESC_PAD_UP)) {
