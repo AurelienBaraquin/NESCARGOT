@@ -25,7 +25,6 @@ static inline unsigned char get_map_tile(unsigned char id, CSVTile *tile_map) {
 }
 
 #define BG_DRAW(px, py, p, px_it, py_it, x) \
-    set_scroll_y(0xff); \
     ppu_off(); \
     for(py = 0; py / py_it < 15; py += py_it){ \
         for(px = 0; px / px_it < 16; px += px_it){ \

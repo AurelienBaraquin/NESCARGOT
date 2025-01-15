@@ -10,6 +10,7 @@
 #include "controller.h"
 #include "bg.h"
 #include "collision.h"
+#include "scroll.h"
 
 #define SCREEN_WIDTH 32
 #define SCREEN_HEIGHT 30
