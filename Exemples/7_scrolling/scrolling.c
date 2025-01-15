@@ -1,5 +1,5 @@
 /**
- * @file scrolling_bg.c
+ * @file scrolling.c
  * 
  * @brief Demonstrates basic background scrolling in response to user input.
  * 
