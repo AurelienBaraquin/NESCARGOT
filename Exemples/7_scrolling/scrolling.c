@@ -9,7 +9,7 @@
  */
 
 #include "LIB/nesc.h"
-#include "main.h"
+#include "CSV/map.c"
 #pragma bss-name(push, "ZEROPAGE")
 
 // Tile definitions for the map
